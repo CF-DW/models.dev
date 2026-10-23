@@ -1,4 +1,4 @@
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): Inception's API doesn't list cache-kept mid-conversation system messages for this model, so system_updates is left out. No per-turn effort or tool-change mechanism reaches this model on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): a mid-conversation system message stays in place and is followed (cached with it vs control: mercury-2.5 10321/10257 vs 10370/10231, mercury-3 7058/6968 vs 6913/7011, mercury-2 7477 vs 6; French 2 of 2 each). No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 name = "Mercury 3"
 description = "Reasoning model for deliberate analysis, multi-step problem solving, and tool use"
@@ -13,6 +13,7 @@ output = ["text"]
 [capabilities]
 tools = { supported = true, updates = false }
 reasoning = { supported = true }
+system_updates = true
 effort_updates = false
 cache = { implicit = true }
 

@@ -1,4 +1,4 @@
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): Google's API doesn't list cache-kept mid-conversation system messages for this model, so system_updates is left out. No per-turn effort or tool-change mechanism reaches this model on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): on the novita route a mid-conversation system message is rendered (+26 to +30 prompt tokens) and followed (French 2 of 2), so system_updates is true although Google's own API hoists it; no cache read on any request, so nothing to lose. No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 base_model = "google/gemma-4-26b-a4b-it"
 
@@ -10,6 +10,7 @@ output = ["text"]
 tools = { supported = true, updates = false }
 reasoning = { supported = true }
 structured_output = true
+system_updates = true
 effort_updates = false
 cache = { implicit = true }
 
