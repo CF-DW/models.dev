@@ -381,9 +381,15 @@ export const ApiBaseUrlV2 = z.union([
   z.string().regex(/^\$\{[A-Z0-9_]+\}/, "Must be a valid URL or env var template"),
 ]);
 
+// The request path appended to `base_url`, set only where a host departs from
+// its protocol's usual path: `systemone` normally posts to
+// `{base_url}/systemone`, Inception's System One API is `{base_url}/decisions`.
+export const ApiPathV2 = z.string().regex(/^\//, "Must start with /");
+
 export const ApiEntryV2 = z
   .object({
     base_url: ApiBaseUrlV2,
+    path: ApiPathV2.optional(),
     sdk: SdkV2.optional(),
     compatibility: CompatibilityV2.optional(),
     capabilities: CapabilitiesOverrideV2.optional(),
@@ -809,10 +815,12 @@ export const OpencodePackageV2 = z.union([
 // complete list, in order, and replace the provider's default API. Anything a
 // table leaves out comes from the provider: `base_url` from `api` (or the SDK's
 // default URL), `sdk.aisdk` from `npm`, `sdk.opencodeai` from `opencodeai`.
-// `"none"` stops a package from being filled in. v1 only gets the first table.
+// `"none"` stops a package from being filled in. v1 only gets the first table,
+// and never its `path`.
 export const AuthoredApiEntryV2 = z
   .object({
     base_url: ApiBaseUrlV2.optional(),
+    path: ApiPathV2.optional(),
     sdk: z
       .object({
         aisdk: z.string().min(1).optional(),

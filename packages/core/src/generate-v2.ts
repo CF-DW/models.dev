@@ -478,6 +478,7 @@ function toModelApis(
       };
       const entry: ApiEntryV2 = {
         base_url,
+        ...(table.path !== undefined ? { path: table.path } : {}),
         // `"none"`: no package supports this API, so the key is left out.
         sdk: Object.fromEntries(Object.entries(sdk).filter(([, value]) => value !== undefined && value !== "none")),
         ...(table.compatibility !== undefined ? { compatibility: table.compatibility } : {}),

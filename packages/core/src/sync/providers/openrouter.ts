@@ -298,13 +298,12 @@ function isDecisionModel(model: OpenRouterModel) {
 
 // Decision models answer POST /api/v1/systemone, which OpenCode's openrouter
 // entry (experimental.evaluation) and @ai-sdk/typesafe-ai's decisionModel (with
-// this baseURL) call, and POST /api/alpha/decisions, which
-// the OpenRouter AI SDK provider's evaluationModel calls.
+// this baseURL) call. POST /api/alpha/decisions takes the same System One body,
+// so it isn't listed separately.
 // https://openrouter.ai/docs/api/api-reference/systemone/submit-a-system-one-request
 // https://openrouter.ai/docs/api/api-reference/alphadecisions/submit-a-decisions-request
 const DECISION_APIS = {
   systemone: { sdk: { aisdk: "@ai-sdk/typesafe-ai", opencodeai: "@opencode/ai/providers/openrouter" } },
-  decisions: { base_url: "https://openrouter.ai/api/alpha", sdk: { opencodeai: "none" } },
 };
 // Chat models whose lab is an image model are also served by the /images router
 // (https://openrouter.ai/api/v1/images/models), which answers OpenAI's format.

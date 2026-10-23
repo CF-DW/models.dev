@@ -7570,10 +7570,9 @@ test("syncs OpenRouter decision models with no supported parameters as decision 
   });
   // v1 reads the first API's package (systemone's) as the provider npm.
   expect(translated?.model.provider).toEqual({ npm: "@ai-sdk/typesafe-ai" });
-  // Both decision endpoints, each with its own packages.
+  // /api/alpha/decisions takes the same System One body, so only /api/v1/systemone is listed.
   expect(translated?.v2Set?.api).toEqual({
     systemone: { sdk: { aisdk: "@ai-sdk/typesafe-ai", opencodeai: "@opencode/ai/providers/openrouter" } },
-    decisions: { base_url: "https://openrouter.ai/api/alpha", sdk: { opencodeai: "none" } },
   });
   const chat = openrouter.translateModel(openRouterModel(), {
     existing: () => undefined,

@@ -224,6 +224,18 @@ test('patchModelV2 keeps aisdk = "none" when sync rewrites the first table', () 
   });
 });
 
+test("patchModelV2 keeps the first table's path when sync rewrites it", () => {
+  const api = { systemone: { base_url: "https://example.com/v1", path: "/decisions" } };
+  const doc = { schema: 2, base_model: "typesafe/jev-1.13", api, cost: { text: { input: { price: 1 }, output: { price: 2 } } } };
+  const before = modelV2ToV1({ ...doc, id: "m" });
+  expect(before.provider).toEqual({ api: "https://example.com/v1" });
+  const { id: _id, ...after } = { ...before, provider: { api: "https://example.com/v2" } };
+  expect(Object.entries(patchModelV2(doc, before, after).api.systemone)).toEqual([
+    ["base_url", "https://example.com/v2"],
+    ["path", "/decisions"],
+  ]);
+});
+
 test("web search prices are written to v2 files, kept by patches, and left out of v1", () => {
   const doc = {
     schema: 2,

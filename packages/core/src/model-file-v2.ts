@@ -196,11 +196,17 @@ function patchApis(first: Doc | undefined, current: Doc) {
   if (protocol === undefined) return first;
   const { opencodeai, aisdk } = current[protocol]?.sdk ?? {};
   const v2Only = { ...(opencodeai !== undefined ? { opencodeai } : {}), ...(aisdk === "none" ? { aisdk } : {}) };
+  const path = current[protocol]?.path;
   let head = first;
-  if (Object.keys(v2Only).length > 0 || rest.length > 0) {
+  if (Object.keys(v2Only).length > 0 || path !== undefined || rest.length > 0) {
     const [key, entry] = Object.entries<Doc>(first ?? { [protocol]: {} })[0]!;
-    const keep = Object.keys(v2Only).length > 0 && key === protocol;
-    head = { [key]: keep ? { ...entry, sdk: { ...v2Only, ...entry.sdk } } : entry };
+    const same = key === protocol;
+    const { base_url, ...others } = entry;
+    const withPath =
+      same && path !== undefined ? { ...(base_url !== undefined ? { base_url } : {}), path, ...others } : entry;
+    head = {
+      [key]: same && Object.keys(v2Only).length > 0 ? { ...withPath, sdk: { ...v2Only, ...entry.sdk } } : withPath,
+    };
   }
   if (rest.length === 0) return head;
   return {
