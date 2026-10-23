@@ -3,6 +3,7 @@
 # Toggle: enable_thinking true|false (default on); Budget: thinking_budget. The Chat API reference lists reasoning_effort high|max for glm-5.1, but live the international endpoint rejects "max" and accepts none|minimal|low|medium|high|xhigh, so no effort list is authored.
 # Cache: explicit and implicit per the context-cache model lists.
 # Live on dashscope-intl.aliyuncs.com 2026-10-19: late system message accepted and obeyed but missed the explicit cache (moved); enable_thinking and thinking_budget changes kept it; adding tools missed it.
+# Re-checked live 2026-10-23 (~8k-token first user message): with cache_control on that message, enable_thinking and thinking_budget changes keep the explicit cache (7.2k-9.3k cached, same as the control); without markers the implicit cache misses after an enable_thinking flip.
 # Implicit cache read: $0.26 per 1M (https://www.qwencloud.com/models/glm-5.1, accessed 2026-10-23; no explicit cache price is published).
 schema = 2
 v2_only = true
