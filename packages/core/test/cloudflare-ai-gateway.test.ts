@@ -1067,8 +1067,27 @@ test("lists a REST table for every other request format the catalog gives a gate
     "chat-completions": {},
     messages: { base_url, sdk: { aisdk: "@ai-sdk/anthropic", opencodeai: main } },
   });
-  // One format and no table: nothing to write. Decision tables are kept.
+  // One format and no table: nothing to write. An existing first table is kept.
   expect(gatewayApis(undefined, undefined, ["chat-completions"])).toBeUndefined();
   const systemone = { systemone: { sdk: { aisdk: "none" } } };
   expect(gatewayApis(systemone, undefined, null)).toEqual(systemone);
+});
+
+test("lists decision models on the /ai/run API", () => {
+  const translated = cloudflareAiGateway.translateModel({
+    catalog: {
+      model_id: "typesafe/jev-1.14.0",
+      task: "Text Generation" as const,
+      provider_details: providerDetails({ input_tokens: 0.042, output_tokens: 0 }),
+      request_formats: ["chat-completions"],
+    },
+  }, { authored: () => undefined, existing: () => undefined }) as { v2Set: { api: (current: unknown) => unknown } };
+  const run = {
+    "workers-ai-run": {
+      base_url: "https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/ai",
+      sdk: { opencodeai: "none" },
+    },
+  };
+  expect(translated.v2Set.api(undefined)).toEqual(run);
+  expect(translated.v2Set.api({ systemone: { sdk: { aisdk: "none" } } })).toEqual(run);
 });

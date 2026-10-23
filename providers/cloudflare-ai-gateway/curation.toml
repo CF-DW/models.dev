@@ -148,6 +148,10 @@ skip = [
   "Route: REST API POST /ai/v1/chat/completions (https://developers.cloudflare.com/ai-gateway/usage/rest-api/): no per-turn effort or tool-change mechanism.",
   "Live 2026-10-19: a mid-conversation system message keeps the cached prefix (grok-4.3, in place); response_format json_schema is enforced (grok-4.3, grok-4.20-0309-non-reasoning).",
 ]
+"typesafe/" = [
+  "Route: REST POST /ai/run with { model, input }, input a System One body; the answer is a run record { result: { state: \"Completed\", result: { answers, usage } } }. https://developers.cloudflare.com/ai/models/typesafe/jev/",
+  "Live 2026-10-23: typesafe/jev (answers as jev-1.13.0) and typesafe/jev-1.14.0 answered on /ai/run; the path form /ai/run/typesafe/jev returns 400 \"No route for that URI\" (code 7000).",
+]
 
 # Cloudflare exposes TypeSafe's evaluation-only Jev alias over /ai/run. The shared
 # metadata marks its structured output support and lack of tool calling.

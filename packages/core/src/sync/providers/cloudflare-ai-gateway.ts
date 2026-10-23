@@ -314,6 +314,8 @@ export const cloudflareAiGateway = {
       };
     }
     const native = NATIVE_API[id.split("/")[0]!];
+    // Decision models are listed under Text Generation but only answer on POST /ai/run.
+    const decision = base !== undefined && labType(base) === "decision";
     return {
       id,
       model: buildCloudflareAiGatewayModel(
@@ -323,7 +325,11 @@ export const cloudflareAiGateway = {
         context.authored(id),
       ),
       header: noteHeader([...prefixNotes(id), ...curated.note ?? []]),
-      v2Set: { api: (current: unknown) => gatewayApis(current, native?.protocol, source.catalog.request_formats) },
+      v2Set: {
+        api: decision
+          ? () => RUN_API
+          : (current: unknown) => gatewayApis(current, native?.protocol, source.catalog.request_formats),
+      },
     };
   },
 } satisfies SyncProvider<SourceModel>;
@@ -382,6 +388,8 @@ export function buildCloudflareAiGatewayModel(
 // Third-party media models run on the REST API's universal endpoint: POST
 // `{base_url}/run` with `{ model, input }`, where `input` follows the model's catalog
 // schema. Generated media comes back as a URL (or a data URI), transcripts as text.
+// Decision models (TypeSafe Jev) take a System One body as `input` and answer in a run
+// record: `{ result: { state: "Completed", result: { answers, usage } } }`.
 // No @opencode/ai entry point speaks /ai/run, so there's no OpenCode package.
 const RUN_API = {
   "workers-ai-run": {
@@ -1212,6 +1220,11 @@ function resolveBaseModel(id: string) {
 
 function labFileExists(id: string) {
   return existsSync(path.join(MODELS_ROOT, `${id}.toml`));
+}
+
+function labType(id: string) {
+  const file = path.join(MODELS_ROOT, `${id}.toml`);
+  return existsSync(file) ? (Bun.TOML.parse(readFileSync(file, "utf8")) as LabFile).type ?? "chat" : undefined;
 }
 
 function baseReasoning(id: string) {
