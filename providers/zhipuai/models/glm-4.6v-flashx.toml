@@ -8,8 +8,8 @@
 # List price: CNY 0.15/0.03/1.5 (input/cache read/output per MTok); input >= 32K: CNY 0.3/0.03/3
 # Toggle: thinking.type = enabled|disabled (default enabled)
 # Mid-conversation (live 2026-10-23 on api.z.ai and open.bigmodel.cn, ~7k-token first user message):
-# the unchanged control gets almost no cache hits, so a late system message can't be confirmed in place
-# and system_updates is left out.
+# a late system message is accepted (200) but wasn't followed in the probe; the unchanged control gets
+# almost no cache hits, so system_updates stays.
 # Adding or removing tools between turns drops the cache (2026-10-19).
 schema = 2
 v2_only = true
@@ -21,6 +21,7 @@ description = "Paid high-speed GLM-4.6V-Flash serving option for affordable visu
 tools = { supported = true, updates = false }
 reasoning = { supported = true, default = { type = "toggle", value = true }, toggle = true }
 top_k = false
+system_updates = true
 cache = { implicit = true }
 
 [api.chat-completions]
