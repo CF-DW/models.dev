@@ -1,5 +1,10 @@
+# Modalities: text only, Cloudflare's typesafe/jev input schema has no assets field and its page shows no image input, unlike typesafe/jev-1.14.0 (https://developers.cloudflare.com/ai/models/typesafe/jev/)
 schema = 2
 base_model = "typesafe/jev-latest"
+
+[modalities]
+input = ["text"]
+output = ["decision"]
 
 [capabilities]
 structured_output = true
