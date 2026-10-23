@@ -1,3 +1,4 @@
+# effort_updates: follows providers/anthropic; Foundry passes Anthropic betas through (tool changes verified live 2026-10-23); deployment blocked today (Marketplace), so not re-tested here.
 # Model ID and pricing: https://platform.claude.com/docs/en/models/haiku-5-5/overview
 # Foundry availability: https://platform.claude.com/docs/en/build-with-claude/claude-in-microsoft-foundry
 # Toggle: thinking.type = adaptive|disabled (disabled only at low, medium, or high effort)
@@ -17,7 +18,7 @@ reasoning = { supported = true, toggle = true, effort = ["low", "medium", "high"
 structured_output = true
 cache = { explicit = { ttl = ["5m", "1h"], max_breakpoints = 4, targets = ["tools", "system", "messages"], min_tokens = 512 } }
 system_updates = true
-effort_updates = false
+effort_updates = true
 
 [api.messages]
 base_url = "https://${AZURE_RESOURCE_NAME}.services.ai.azure.com/anthropic/v1"
