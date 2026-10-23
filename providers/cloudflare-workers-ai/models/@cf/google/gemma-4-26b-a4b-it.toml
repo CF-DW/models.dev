@@ -5,7 +5,7 @@
 # https://developers.cloudflare.com/workers-ai/models/gemma-4-26b-a4b-it/sync-input.json (accessed 2026-10-19)
 # Cache: implicit prefix caching (https://developers.cloudflare.com/workers-ai/features/prompt-caching/); Search reports a cached-input price and live
 # repeats read cached tokens (the model page lists no cached price).
-# Mid-conversation: Live 2026-10-19 (/ai/v1/chat/completions, x-session-affinity, ~7k-token prefix): a late system message keeps the cached prefix and is honored;
+# Mid-conversation: system_updates left out because Google's own API doesn't set it (providers/google). Live 2026-10-19 (/ai/v1/chat/completions, x-session-affinity, ~7k-token prefix): a late system message keeps the cached prefix and is honored;
 # no effort control; adding or removing a tool drops the cached history (tools render ahead of it).
 schema = 2
 base_model = "google/gemma-4-26b-a4b-it"
@@ -15,7 +15,6 @@ tools = { supported = true, updates = false }
 reasoning = { supported = true, toggle = true }
 cache = { implicit = true }
 structured_output = true
-system_updates = true
 effort_updates = false
 
 [limit]

@@ -3,7 +3,7 @@
 # This dated release adds a distinct low effort; the older preview does not.
 # Creator: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813#chat-template
 # Cache: implicit prefix caching; cached-input price on the model page (https://developers.cloudflare.com/workers-ai/features/prompt-caching/).
-# Mid-conversation: Live 2026-10-19 (/ai/v1/chat/completions, x-session-affinity, ~7k-token prefix): a late system message keeps the cached prefix and is honored;
+# Mid-conversation: system_updates left out because DeepSeek's own API has it false for V4 Pro (providers/deepseek). Live 2026-10-19 (/ai/v1/chat/completions, x-session-affinity, ~7k-token prefix): a late system message keeps the cached prefix and is honored;
 # changing reasoning_effort reads 0 cached tokens on the first request after the switch; adding or removing a tool drops the cached history (tools render ahead of it).
 schema = 2
 base_model = "deepseek/deepseek-v4-pro-0813"
@@ -13,7 +13,6 @@ tools = { supported = true, updates = false }
 reasoning = { supported = true, effort = ["none", "low", "high", "max"] }
 cache = { implicit = true }
 structured_output = true
-system_updates = true
 effort_updates = false
 
 [limit]
