@@ -1,4 +1,4 @@
-# Mid-conversation: system_updates = true: Meta keeps late system/developer messages in place on its own API (providers/meta; live 2026-10-23); the only upstream here is Meta, and the 2026-10-19 Chat Completions probes here split one in place, one cache miss
+# Mid-conversation (Chat Completions, live 2026-10-23 pinned to Meta, the only upstream): system_updates = true: late system message kept in place (full 5,105 or 5,233-token prefix read in 4/4 trials, same as the control) and followed (French 2/2)
 # effort_updates = false: configuration_update is rejected with a 400 for this model (https://openrouter.ai/docs/guides/best-practices/reasoning-tokens#mid-conversation-effort)
 # tools.updates = false: Chat Completions rejects tool_addition/tool_removal for non-Claude-4.8+ models (live 400)
 schema = 2

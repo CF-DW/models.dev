@@ -1,7 +1,7 @@
 # Toggle: reasoning.enabled = true|false
 # https://openrouter.ai/docs/guides/best-practices/reasoning-tokens
 # Mid-conversation (Chat Completions, probed 2026-10-19): system_updates = true: forwarded in place (live: cache prefix kept on Alibaba)
-# effort_updates = true: changing reasoning.enabled / reasoning.max_tokens for one turn (enable_thinking / thinking_budget upstream) keeps the cache on Alibaba's own API (providers/alibaba); configuration_update itself is rejected with a 400
+# effort_updates = false: toggling reasoning.enabled for one turn drops the cache here (live 2026-10-23 pinned to Alibaba: control 5,760 cached, toggle turn 0 in 2/2), although Alibaba's own API keeps it; configuration_update is rejected with a 400
 # tools.updates = false: Chat Completions rejects tool_addition/tool_removal for non-Claude-4.8+ models (live 400)
 schema = 2
 base_model = "alibaba/qwen3.7-max"
@@ -11,7 +11,7 @@ tools = { supported = true, updates = false }
 reasoning = { supported = true, toggle = true }
 structured_output = true
 system_updates = true
-effort_updates = true
+effort_updates = false
 
 [api.chat-completions]
 
