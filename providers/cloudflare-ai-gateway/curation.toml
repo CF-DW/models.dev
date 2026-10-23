@@ -337,7 +337,6 @@ reasoning_options = [{ type = "effort", values = ["none", "low", "medium", "high
 
 [models."openai/gpt-5.4-pro"]
 structured_output = false
-note = ["system_updates: left out. No prompt caching on this model (cache = false), so there is no cached prefix to keep."]
 reasoning_options = [{ type = "effort", values = ["medium", "high", "xhigh"] }]
 
 [models."openai/gpt-5.5"]
@@ -346,7 +345,6 @@ reasoning_options = [{ type = "effort", values = ["none", "low", "medium", "high
 
 [models."openai/gpt-5.5-pro"]
 structured_output = true
-note = ["system_updates: left out. No prompt caching on this model (cache = false), so there is no cached prefix to keep."]
 reasoning_options = [{ type = "effort", values = ["medium", "high", "xhigh"] }]
 
 [models."openai/gpt-5.6-luna"]
@@ -426,10 +424,10 @@ note = ["Toggle: enable_thinking = true|false (top-level field on POST /ai/v1/ch
 reasoning_options = [{ type = "toggle" }, { type = "budget_tokens" }]
 
 [models."alibaba/qwen3-max"]
-note = ["system_updates: left out. Alibaba's own API doesn't set it for Qwen3 Max (providers/alibaba), and this route has no cached-input price."]
+note = ["system_updates: left out. Not tested live on this route (the REST route has no unified billing credit), and Alibaba's own API doesn't set it for Qwen3 Max (providers/alibaba)."]
 
 [models."alibaba/qwen3.5-397b-a17b"]
-note = ["system_updates: left out. No prompt caching on this route (no cached-input price).", "Toggle: enable_thinking = true|false (top-level field on POST /ai/v1/chat/completions; live 2026-10-19: false -> no reasoning).", "Budget: thinking_budget = <integer reasoning tokens> (top-level field; live 2026-10-19: 100 -> 100 reasoning tokens)."]
+note = ["Toggle: enable_thinking = true|false (top-level field on POST /ai/v1/chat/completions; live 2026-10-19: false -> no reasoning).", "Budget: thinking_budget = <integer reasoning tokens> (top-level field; live 2026-10-19: 100 -> 100 reasoning tokens)."]
 reasoning_options = [{ type = "toggle" }, { type = "budget_tokens" }]
 
 [models."alibaba/qwen3.7-max"]
