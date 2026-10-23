@@ -7,8 +7,13 @@
 # - https://ai.google.dev/gemini-api/docs/image-understanding (and /audio, /video-understanding)
 # - https://generativelanguage.googleapis.com/v1beta/models (topP/topK per model)
 # Flex halves input/output only; cache reads and storage stay at Standard rates.
-# Mid-conversation updates: https://ai.google.dev/api/caching#Content (role is "user" or "model");
-# systemInstruction, thinking config and tools are request-level in generateContent and Interactions.
+# system_updates (live 2026-10-23, generateContent): a {"role": "system", "parts": [{"text": ...}]} entry in
+#   `contents` between the model reply and the next user turn is accepted, stays in place and is obeyed
+#   (answered in French). Cached tokens with it 7240/7242 vs 7245/7567 on the unchanged control (short
+#   systemInstruction, ~9k-token first user turn).
+#   Undocumented: the spec lists only "user" and "model" for Content.role
+#   (https://ai.google.dev/api/caching#Content). The Chat Completions endpoint moves a late system message to the top (0 cached) and Interactions rejects system_input.
+# Thinking config and tools are request-level; changing the thinking level drops the cache (live 2026-10-23).
 # Grounding with Google Search: $14 per 1,000 search queries (each query the model runs is billed). Price: https://ai.google.dev/gemini-api/docs/pricing#gemini-3.1-pro-preview; support ("Search grounding: Supported"): https://ai.google.dev/gemini-api/docs/models/gemini-3.1-pro-preview
 # Token-only multipliers (object factor, so cost.web_search is unscaled): Grounding keeps its price under Priority, Flex and the scheduled increases (https://ai.google.dev/gemini-api/docs/pricing).
 # APIs: generateContent, the OpenAI-compatible Chat Completions endpoint (https://ai.google.dev/gemini-api/docs/openai) and Interactions (https://ai.google.dev/gemini-api/docs/interactions-overview); Chat Completions and Interactions confirmed live 2026-10-22.
@@ -33,7 +38,7 @@ top_p = true
 top_k = true
 cache = { implicit = true, explicit = true }
 service_tier = ["flex", "priority"]
-system_updates = false
+system_updates = true
 effort_updates = false
 
 [limit]
