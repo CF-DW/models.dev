@@ -6,15 +6,17 @@
 #     prefix before it) -> system_updates = true.
 #   * Prompt prefixes are cached automatically (usage.cached_tokens), with no request field to control it
 #     and no cache price; billed_units.input_tokens did not drop on cache hits.
-#   * The API has no per-turn effort control -> effort_updates = false.
 #   * Tools are a request-level list with no add/remove mechanism; adding a tool to an otherwise identical
 #     request dropped cached_tokens (e.g. 6032 -> 112 on Command A) -> tools.updates = false.
 # Structured output: https://docs.cohere.com/docs/structured-outputs; live response_format json_object +
 #   json_schema returned schema-valid JSON.
 # Reasoning (https://docs.cohere.com/docs/reasoning, https://docs.cohere.com/reference/chat):
 # Toggle: thinking.type = "enabled" (default) | "disabled". Budget: thinking.token_budget (positive integer;
-#   leave at least 1K tokens for the response). Live: switching thinking off between turns rewrote the
-#   cached prefix (Command A Reasoning: 6144 -> 480 cached tokens; Command A+: 0 cached in 2/2 runs).
+#   leave at least 1K tokens for the response).
+# effort_updates: changing thinking.type or thinking.token_budget on the next request keeps the cached
+#   prefix (live 2026-10-23, short system prompt, ~7.7k-token first user message, prompt_tokens unchanged).
+#   Full-prefix hits after on->off 3/9, off->on 3/9, budget 500->1500 3/7, 1500->500 3/7; the unchanged
+#   control hit 6/9 (Cohere's cache is noisy). Reasoning tokens move with the switch (0 when off).
 # Tools: tool_choice returns 400 "tool_choice is not supported for this model"; strict_tools = true is accepted.
 # Pricing: $2.50/$10 per 1M as added on launch day (2026-06-09, models.dev commit 7b65a7c6d by Cohere's team).
 #   Open question: https://cohere.com/pricing lists Command A+ under "Free" ("API key" $0, "Model download" $0)
@@ -28,7 +30,7 @@ tools = { supported = true, strict = true, choice = ["auto"], updates = false }
 reasoning = { supported = true, default = { type = "toggle", value = true }, toggle = true, budget = { min = 1 } }
 structured_output = true
 system_updates = true
-effort_updates = false
+effort_updates = true
 cache = { implicit = true }
 
 [api.cohere-chat]
