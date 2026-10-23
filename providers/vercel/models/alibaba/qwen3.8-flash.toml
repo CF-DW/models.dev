@@ -4,7 +4,7 @@
 # https://vercel.com/docs/ai-gateway/models-and-providers/provider-options
 # Toggle: providerOptions.alibaba.enableThinking true|false -> enable_thinking
 # Budget: providerOptions.alibaba.thinkingBudget -> thinking_budget (reasoning tokens)
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 base_model = "alibaba/qwen3.8-flash"
 name = "Qwen 3.8 Flash"

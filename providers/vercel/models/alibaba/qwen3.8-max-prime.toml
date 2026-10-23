@@ -2,7 +2,7 @@
 # https://vercel.com/docs/ai-gateway/sdks-and-apis/openai-chat-completions/reasoning
 # Effort: reasoning.effort = none|low|medium|high; none turns thinking off,
 # so the catalog's separate toggle is redundant. No budget is advertised.
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 base_model = "alibaba/qwen3.8-max-prime"
 

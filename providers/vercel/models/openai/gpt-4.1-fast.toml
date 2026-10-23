@@ -1,4 +1,4 @@
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19): system/developer messages stay in place (cache prefix kept). The gateway's AI SDK request has no OpenAI configuration_update, so effort changes are false.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-19): system/developer messages stay in place (cache prefix kept). The AI SDK's reasoningEffortUpdate is GPT-6 and later only, and a top-level effort change misses the cache, so effort_updates stays false.
 # Tool changes (@ai-sdk/gateway, live 2026-10-23): providerOptions.openai.additionalTools on a tool result reaches OpenAI as a Responses additional_tools item, the model sees the tool and the cached prefix is kept, so tools.updates = true (add only; https://ai-sdk.dev/providers/ai-sdk-providers/openai). The azure and bedrock routes drop it; the default route is openai.
 schema = 2
 base_model = "openai/gpt-4.1"

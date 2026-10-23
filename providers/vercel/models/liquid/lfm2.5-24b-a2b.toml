@@ -1,4 +1,4 @@
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): no cache read on any request (control and system both 0, 2 trials), so system_updates is left out. No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 name = "LFM2.5-24B-A2B"
 description = "Reasoning model for deliberate analysis, multi-step problem solving, and tool use"
@@ -13,7 +13,6 @@ output = ["text"]
 [capabilities]
 tools = { supported = true, updates = false }
 reasoning = { supported = true, effort = ["minimal", "low", "medium", "high", "xhigh", "max"] }
-system_updates = true
 effort_updates = false
 cache = { implicit = true }
 

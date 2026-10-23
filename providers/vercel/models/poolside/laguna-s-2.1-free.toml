@@ -3,7 +3,7 @@
 # - https://huggingface.co/poolside/Laguna-S-2.1 — per-request thinking via enable_thinking
 # - https://docs.poolside.ai/get-started/supported-models — thinking on or off per request
 # API: {"chat_template_kwargs": {"enable_thinking": false}}
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): this host lists no cached-input price for the model, so there is no cache for a mid-conversation change to keep; system_updates left out.
 schema = 2
 base_model = "poolside/laguna-s-2.1"
 name = "Laguna S 2.1 Free"
@@ -13,7 +13,6 @@ description = "Free provider route for experiments, demos, and cost-sensitive ch
 tools = { supported = true, updates = false }
 reasoning = { supported = true, toggle = true }
 structured_output = false
-system_updates = true
 effort_updates = false
 
 [limit]

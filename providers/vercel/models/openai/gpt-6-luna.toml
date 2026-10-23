@@ -1,4 +1,4 @@
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19): system/developer messages stay in place (cache prefix kept). The gateway's AI SDK request has no OpenAI configuration_update, so effort changes are false.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-23): developer messages stay in place (cache prefix kept, followed; e.g. gpt-5.4 6912/6912, gpt-4.1-mini 7552/7552). Per-turn effort: an empty system message with providerOptions.openai.reasoningEffortUpdate becomes a Responses configuration_update and keeps the cache (gpt-6-sol 12789 and 12783 both directions, gpt-6-luna 4505/4507; reasoning tokens move), so effort_updates = true. A top-level effort change misses (0).
 # Tool changes (@ai-sdk/gateway, live 2026-10-23): providerOptions.openai.additionalTools on a tool result reaches OpenAI as a Responses additional_tools item, the model sees the tool and the cached prefix is kept, so tools.updates = true (add only; https://ai-sdk.dev/providers/ai-sdk-providers/openai). The azure and bedrock routes drop it; the default route is openai.
 schema = 2
 base_model = "openai/gpt-6-luna"
@@ -8,7 +8,7 @@ tools = { supported = true, updates = true }
 reasoning = { supported = true, effort = ["none", "low", "medium", "high", "xhigh", "max"] }
 structured_output = true
 system_updates = true
-effort_updates = false
+effort_updates = true
 cache = { implicit = true, explicit = true }
 
 [api.chat-completions]

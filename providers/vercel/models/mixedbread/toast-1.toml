@@ -1,4 +1,4 @@
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message is hoisted (the next request misses the cache). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message is hoisted (the next request misses the cache). No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 base_model = "mixedbread/toast-1"
 

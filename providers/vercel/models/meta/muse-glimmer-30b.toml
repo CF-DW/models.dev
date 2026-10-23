@@ -4,7 +4,7 @@
 # Same controls as OpenRouter/Together and the model card.
 # https://huggingface.co/meta-models/Muse-Glimmer-30B
 # https://openrouter.ai/meta/muse-glimmer-30b
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 base_model = "meta/muse-glimmer-30b"
 

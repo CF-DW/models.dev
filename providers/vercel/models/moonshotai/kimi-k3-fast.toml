@@ -4,7 +4,7 @@
 # No thinking toggle — K3 always returns reasoning content.
 # https://vercel.com/ai-gateway/models/kimi-k3-fast
 # https://platform.kimi.ai/docs/guide/use-reasoning-effort
-# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). Per-turn effort and tool changes exist only for Anthropic models on this API.
+# Mid-conversation (@ai-sdk/gateway, live 2026-10-19, default route): a mid-conversation system message stays in place (cache prefix kept). No per-turn effort or tool-change mechanism reaches this model on this API.
 schema = 2
 base_model = "moonshotai/kimi-k3"
 name = "Kimi K3 Fast"
