@@ -233,7 +233,7 @@ export function buildVercelModel(
     status: existing?.status,
     interleaved: existing?.interleaved,
     experimental: existing?.experimental,
-    provider: existing?.provider,
+    provider: model.type === "evaluation" ? DECISION_V1_PROVIDER : existing?.provider,
     cost,
     limit: { context, input, output },
     modalities: {
@@ -462,15 +462,26 @@ const LIVE_MODELS = new Set(["openai/gpt-live-1"]);
 // OpenCode's vercel-ai-gateway entry point only speaks the chat APIs, not
 // these endpoints.
 const MEDIA_SDK = { opencodeai: "none" };
-// Decision models: POST /v1/evaluate, which OpenCode's vercel-ai-gateway entry
-// calls (experimental.evaluation). @ai-sdk/gateway's decisionModel uses its own
+// Decision models: first POST /v1/decisions, OpenAI's Decisions format, which
+// @ai-sdk/openai's decisionModel speaks with this baseURL; then POST
+// /v1/evaluate, which OpenCode's vercel-ai-gateway entry calls
+// (experimental.evaluation). @ai-sdk/gateway's decisionModel uses its own
 // /v4/ai/decision-model endpoint instead.
 // https://vercel.com/docs/ai-gateway/modalities/decision
 const DECISION_APIS = {
+  decisions: {
+    base_url: "https://ai-gateway.vercel.sh/v1",
+    sdk: { aisdk: "@ai-sdk/openai", opencodeai: "none" },
+  },
   evaluate: {
     base_url: "https://ai-gateway.vercel.sh/v1",
     sdk: { aisdk: "none", opencodeai: "@opencode/ai/providers/vercel-ai-gateway" },
   },
+};
+// v1 reads the first API as `provider`.
+const DECISION_V1_PROVIDER = {
+  npm: DECISION_APIS.decisions.sdk.aisdk,
+  api: DECISION_APIS.decisions.base_url,
 };
 const LIVE_SDK = { aisdk: "none", opencodeai: "none" };
 // Every language model is also served on the OpenAI Responses and Anthropic

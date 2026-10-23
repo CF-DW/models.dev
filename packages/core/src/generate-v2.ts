@@ -430,7 +430,7 @@ export function resolveProtocol(
 ): ApiProtocolV2 {
   if (model.type === "decision") {
     if (provider.id === "cloudflare-workers-ai") return "workers-ai-run";
-    if (provider.id === "vercel") return "evaluate";
+    if (provider.id === "vercel") return "decisions";
     return "systemone";
   }
 

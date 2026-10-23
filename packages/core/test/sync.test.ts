@@ -6406,12 +6406,19 @@ test("Vercel sync maps every catalog type and serves media models on their own e
   const evaluation = vercel.translateModel(vercelMedia({ id: "example/decision-model", type: "evaluation" }), context) as any;
   expect(evaluation.v2Set).toEqual({
     api: {
+      decisions: {
+        base_url: "https://ai-gateway.vercel.sh/v1",
+        sdk: { aisdk: "@ai-sdk/openai", opencodeai: "none" },
+      },
       evaluate: {
         base_url: "https://ai-gateway.vercel.sh/v1",
         sdk: { aisdk: "none", opencodeai: "@opencode/ai/providers/vercel-ai-gateway" },
       },
     },
   });
+  expect(Object.keys(evaluation.v2Set.api)).toEqual(["decisions", "evaluate"]);
+  // v1 reads the first API.
+  expect(evaluation.model.provider).toEqual({ npm: "@ai-sdk/openai", api: "https://ai-gateway.vercel.sh/v1" });
   expect(vercel.translateModel(vercelMedia({ id: "example/chat-model", type: "language" }), context)).toHaveProperty("v2Set.api", chatApis);
   // A language route for a model we type as image keeps only its default API.
   const imageContext = { ...context, existing: () => ({ type: "image" }) as any };
