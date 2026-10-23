@@ -1,5 +1,6 @@
 # Image MIME types: Cloudflare lists none; this ID serves DeepSeek V4.1 Flash 1017 (models/deepseek/deepseek-v4.1-flash-1017),
 # so the lab's formats apply: https://api-docs.deepseek.com/guides/vision (JPEG, PNG, GIF, WebP).
+# Cache: implicit prefix caching; cached-input price on Search, and live repeats read cached tokens (https://developers.cloudflare.com/workers-ai/features/prompt-caching/).
 # Mid-conversation: live 2026-10-23 (/ai/v1/chat/completions, x-session-affinity, ~7k-token first user message): a system message after the assistant turn keeps the cached prefix and is followed.
 schema = 2
 name = "Deepseek V4.1 Flash 1017"
@@ -15,6 +16,7 @@ output = ["text"]
 [capabilities]
 tools = { supported = true }
 reasoning = { supported = true, effort = ["none", "low", "high", "max"] }
+cache = { implicit = true }
 structured_output = true
 temperature = true
 system_updates = true
