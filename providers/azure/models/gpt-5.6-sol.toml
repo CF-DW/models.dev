@@ -1,3 +1,4 @@
+# effort_updates: live 2026-10-23 `configuration_update` was accepted (cache kept) on only some requests and 400 on the rest (luna 4/6, sol 1/4, terra 1/4), so it stays false.
 # Fast mode is Azure priority processing (Global Standard): https://azure.microsoft.com/en-us/pricing/details/azure-openai/ and https://learn.microsoft.com/en-us/azure/foundry/openai/concepts/priority-processing
 # Pricing: https://azure.microsoft.com/en-us/blog/gpt-5-6-now-available-in-microsoft-foundry/
 # Rates: https://azure.microsoft.com/en-us/pricing/details/cognitive-services/openai-service/

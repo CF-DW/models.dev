@@ -1,3 +1,4 @@
+# effort_updates: live 2026-10-23 `configuration_update` was accepted (cache kept) on only some requests and 400 on the rest (luna 4/6, sol 1/4, terra 1/4), so it stays false.
 # Pricing: https://developers.openai.com/api/docs/pricing
 # Mid-conversation (live, aiden-azury-group, 2026-10-19; probe in notes/azure-mid-conversation-probe.ts): Azure OpenAI Responses and Chat Completions accept
 # system/developer messages in place; Responses accepts `additional_tools` items (https://developers.openai.com/api/docs/guides/tools-tool-search#add-tools-at-a-specific-point-in-the-input);
