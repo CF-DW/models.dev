@@ -1,7 +1,6 @@
 # Pricing and endpoint (Responses): https://opencode.ai/v2/docs/console/models/ (accessed 2026-10-21).
 # Effort: reasoning.effort = minimal|low|medium|high|xhigh (not re-verified on Zen: model access is disabled for the probe key)
-# Mid-conversation (2026-10-23): system_updates = true, derived from the lab (providers/meta/models/muse-spark-1.2.toml) and the Muse on Zen Responses spot check,
-#   since this model returns 403 to the probe key. Live on Zen 2026-10-23: muse-spark-1.3 and muse-wonder-1.0: a developer message before the next user turn kept the cache and was followed.
+# Mid-conversation flags (system_updates, effort_updates, tools.updates) follow providers/meta/models/muse-spark-1.2.toml (Zen passes requests through).
 schema = 2
 base_model = "meta/muse-spark-1.2"
 

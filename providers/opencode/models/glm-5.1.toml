@@ -1,8 +1,7 @@
 # Pricing and endpoint (Chat Completions): https://opencode.ai/v2/docs/console/models/ (accessed 2026-10-21).
 # Toggle: thinking.type = enabled|disabled (not re-verified on Zen: model access is disabled for the probe key)
-# Mid-conversation (2026-10-23): system_updates = true, derived from the lab (providers/zhipuai/models/glm-5.1.toml) and the GLM on Zen Chat Completions spot check,
-#   since this model returns 403 to the probe key. Live on Zen 2026-10-23: glm-5.3 and glm-5.3-flash: a system message before the next user turn kept the cache and was followed.
 # knowledge: the host's value, unsourced (no official cutoff found). Kept so v1 doesn't lose it.
+# Mid-conversation flags (system_updates, effort_updates, tools.updates) follow providers/zhipuai/models/glm-5.1.toml (Zen passes requests through).
 schema = 2
 base_model = "zhipuai/glm-5.1"
 knowledge = "2025-04"

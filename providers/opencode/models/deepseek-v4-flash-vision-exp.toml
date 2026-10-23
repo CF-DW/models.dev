@@ -1,8 +1,7 @@
 # Toggle: thinking.type = enabled|disabled
 # Effort: reasoning_effort = low|high|max
 # Deprecated: absent from the docs and GET https://opencode.ai/inference/v1/models; requests return 403 "Model access is disabled" (live 2026-10-21) (https://opencode.ai/v2/docs/console/models/#deprecated-models, accessed 2026-10-21).
-# Mid-conversation (2026-10-23): system_updates = true, derived from the lab (providers/deepseek/models/deepseek-v4-flash-vision-exp.toml) and the DeepSeek V4 Flash on Zen Chat Completions spot check,
-#   since this model wasn't probed. Live on Zen 2026-10-23: deepseek-v4.1-flash: a system message before the next user turn kept the cache and was followed.
+# Mid-conversation flags (system_updates, effort_updates, tools.updates) follow providers/deepseek/models/deepseek-v4-flash-vision-exp.toml (Zen passes requests through).
 schema = 2
 base_model = "deepseek/deepseek-v4-flash-vision-exp"
 status = "deprecated"
