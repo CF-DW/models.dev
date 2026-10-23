@@ -4,7 +4,9 @@
 # Budget: thinking.budget_tokens with thinking.type = enabled
 # Mid-conversation (live on Zen 2026-10-21; warm prefix, then the change before the next turn vs an unchanged control; cached prompt tokens control -> changed):
 #   system_updates = true: a role:system message after the last user turn was kept in place (cached 14504 -> 14523)
-#   effort_updates = false: thinking.type enabled -> disabled dropped the cache (cached 14507 -> 0)
+#   effort_updates = true: re-tested 2026-10-23 with cache_control on the user turns; changing the reasoning setting for one turn kept the cache:
+#     thinking.type disabled -> enabled 9016/8714/8410/8714, enabled -> disabled 8710/9016/9316/8714, budget_tokens 6000 -> 1024 9014/9014,
+#     1024 -> 6000 9316/9014 (controls 8710-9016), and the reasoning length moved with it. Same as Alibaba's own API (providers/alibaba).
 #   tools.updates = false: adding a tool dropped the cache (cached 14763 -> 0)
 # Cache (live): explicit cache_control (block or top-level); no read without it; a 1h ttl is written as 5m.
 schema = 2
@@ -16,7 +18,7 @@ tools = { supported = true, updates = false }
 reasoning = { supported = true, toggle = true, budget = {} }
 cache = { explicit = { ttl = ["5m"] } }
 system_updates = true
-effort_updates = false
+effort_updates = true
 
 [limit]
 context = 262_144

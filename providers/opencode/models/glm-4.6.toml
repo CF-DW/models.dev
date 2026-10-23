@@ -1,4 +1,6 @@
 # Toggle: thinking.type = enabled|disabled (deprecated; not re-verified on Zen)
+# Mid-conversation (2026-10-23): system_updates = true, derived from the lab (providers/zhipuai/models/glm-4.6.toml) and the GLM on Zen Chat Completions spot check,
+#   since this model wasn't probed. Live on Zen 2026-10-23: glm-5.3 and glm-5.3-flash: a system message before the next user turn kept the cache and was followed.
 schema = 2
 base_model = "zhipuai/glm-4.6"
 description = "Legacy model retained for compatibility with older integrations"
@@ -6,6 +8,7 @@ status = "deprecated"
 
 [capabilities]
 reasoning = { supported = true, toggle = true }
+system_updates = true
 
 [api.chat-completions]
 base_url = "https://opencode.ai/inference/openai/v1"

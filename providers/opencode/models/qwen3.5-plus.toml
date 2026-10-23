@@ -2,13 +2,16 @@
 # No thinking.budget_tokens bound recorded, matching Alibaba's first-party entry (qwen3.6-plus on Zen accepts 100000).
 # Toggle: thinking.type = enabled|disabled (not re-verified on Zen: model access is disabled for the probe key)
 # Budget: thinking.budget_tokens with thinking.type = enabled (not re-verified on Zen: model access is disabled for the probe key)
-# Mid-conversation flags unset: Zen documents none and this model wasn't testable (model access is disabled for the probe key).
+# Mid-conversation (2026-10-23): system_updates and effort_updates = true, derived from the lab (providers/alibaba/models/qwen3.5-plus.toml) and the Qwen on Zen Messages spot check,
+#   since this model returns 403 to the probe key. Live on Zen 2026-10-23: qwen3.6-plus and qwen3.8-flash: a role:system message after the last user turn kept the cache and was followed; on qwen3.6-plus, changing thinking.type or budget_tokens for one turn kept it.
 schema = 2
 base_model = "alibaba/qwen3.5-plus"
 description = "Multimodal reasoning model for visual analysis, planning, and tool use"
 
 [capabilities]
 reasoning = { supported = true, toggle = true, budget = {} }
+system_updates = true
+effort_updates = true
 
 [limit]
 context = 262_144

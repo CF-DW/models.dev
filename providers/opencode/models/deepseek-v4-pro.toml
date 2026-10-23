@@ -2,7 +2,8 @@
 # Toggle: thinking.type = enabled|disabled
 # Effort: reasoning_effort = high|max
 # Mid-conversation (live on Zen 2026-10-21; warm prefix, then the change before the next turn vs an unchanged control; cached prompt tokens control -> changed):
-#   system_updates = true: a system message before the next user turn was kept in place (cached 8448 -> 8704)
+#   system_updates left out (false): DeepSeek's own API moves a late system message to the leading prompt and drops the cache (providers/deepseek/models/deepseek-v4-pro.toml),
+#     so the host value follows the lab. Zen's route kept the cache in a 2026-10-23 spot check, but that isn't relied on.
 #   effort_updates = false: reasoning_effort high -> max dropped the cache (cached 8448 -> 0)
 #   tools.updates = false: adding a tool dropped the cache (cached 9001 -> 0)
 # Cache (live): implicit (cached tokens reported without cache markers).
@@ -14,7 +15,6 @@ tools = { supported = true, updates = false }
 reasoning = { supported = true, toggle = true, effort = ["high", "max"] }
 structured_output = true
 cache = { implicit = true }
-system_updates = true
 effort_updates = false
 
 [api.chat-completions]

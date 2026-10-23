@@ -1,11 +1,13 @@
 # Pricing and endpoint (Responses): https://opencode.ai/v2/docs/console/models/ (accessed 2026-10-21).
-# Mid-conversation flags unset: Zen documents none and this model wasn't testable (model access is disabled for the probe key).
+# Mid-conversation (2026-10-23): system_updates = true, derived from the lab (providers/xai/models/grok-build-0.1.toml) and the Grok on Zen Responses spot check,
+#   since this model returns 403 to the probe key. Live on Zen 2026-10-23: grok-4.7: a developer message before the next user turn kept the cache.
 schema = 2
 base_model = "xai/grok-build-0.1"
 
 [capabilities]
 reasoning = { supported = true }
 structured_output = true
+system_updates = true
 
 [api.responses]
 base_url = "https://opencode.ai/inference/openai/v1"

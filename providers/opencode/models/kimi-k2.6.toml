@@ -1,12 +1,14 @@
 # Pricing and endpoint (Chat Completions): https://opencode.ai/v2/docs/console/models/ (accessed 2026-10-21).
 # Toggle: thinking.type = enabled|disabled (not re-verified on Zen: model access is disabled for the probe key)
-# Mid-conversation flags unset: Zen documents none and this model wasn't testable (model access is disabled for the probe key).
+# Mid-conversation (2026-10-23): system_updates = true, derived from the lab (providers/moonshotai/models/kimi-k2.6.toml) and the Kimi on Zen Chat Completions spot check,
+#   since this model returns 403 to the probe key. Live on Zen 2026-10-23: kimi-k3: a system message before the next user turn kept the cache and was followed.
 schema = 2
 base_model = "moonshotai/kimi-k2.6"
 description = "Kimi multimodal agent model for visual understanding, coding, and planning"
 
 [capabilities]
 reasoning = { supported = true, toggle = true }
+system_updates = true
 
 [limit]
 output = 65_536
